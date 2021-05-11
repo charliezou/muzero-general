@@ -216,7 +216,7 @@ class MuZero:
                     f'Last test reward: {info["total_reward"]:.2f}. Training step: {info["training_step"]}/{self.config.training_steps}. Played games: {info["num_played_games"]}. Loss: {info["total_loss"]:.2f}',
                     end="\r",
                 )
-                print("1.Self played games:", info["num_played_games:"], ";2.Training steps", info["training_step"], ";3.Self played steps:", info["num_played_steps"],  counter)                
+                print("1.Self played games ", info["num_played_games"], ";2.Training steps ", info["training_step"], ";3.Self played steps ", info["num_played_steps"],  counter)                
                 
                 counter += 1
                 time.sleep(10)
