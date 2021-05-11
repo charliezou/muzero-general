@@ -220,7 +220,7 @@ class MuZero:
                 print("2.Training steps", info["training_step"], counter)
                 print("3.Self played steps", info["num_played_steps"], counter)
                 counter += 1
-                time.sleep(0.5)
+                time.sleep(10)
         except KeyboardInterrupt:
             ray.kill(test_worker)
             ray.kill(self.training_worker)
