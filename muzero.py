@@ -171,6 +171,7 @@ class MuZero:
         info = ray.get(self.shared_storage_worker.get_info.remote())
         try:
             while info["training_step"] < self.config.training_steps:
+                print("counter=%d", counter)
                 info = ray.get(self.shared_storage_worker.get_info.remote())
                 info.update(ray.get(self.replay_buffer_worker.get_info.remote()))
                 writer.add_scalar(
@@ -434,6 +435,7 @@ if __name__ == "__main__":
     # Initialize MuZero
     choice = int(choice)
     game_name = games[choice]
+    print(game_name+" is Choosed")
     muzero = MuZero(game_name)
 
     while True:
