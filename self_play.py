@@ -128,6 +128,8 @@ class SelfPlay:
 
         if render:
             self.game.render()
+            
+        next_root = None
 
         with torch.no_grad():
             while (
@@ -151,8 +153,9 @@ class SelfPlay:
                         self.game.legal_actions(),
                         self.game.to_play(),
                         True,
+                        next_root
                     )
-                    action = self.select_action(
+                    action, next_root = self.select_action(
                         root,
                         temperature
                         if not temperature_threshold
@@ -246,7 +249,7 @@ class SelfPlay:
             )
             action = numpy.random.choice(actions, p=visit_count_distribution)
 
-        return action
+        return action, node.children[action]
 
 
 # Game independent
@@ -316,7 +319,8 @@ class MCTS:
         min_max_stats = MinMaxStats()
 
         max_tree_depth = 0
-        for _ in range(self.config.num_simulations):
+        num_simulations = self.config.num_simulations - root.visit_count
+        for _ in range(num_simulations):
             virtual_to_play = to_play
             node = root
             search_path = [node]
