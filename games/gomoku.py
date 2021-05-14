@@ -54,7 +54,7 @@ class MuZeroConfig:
         
         # Residual Network
         self.downsample = False  # Downsample observations before representation network (See paper appendix Network Architecture)
-        self.blocks = 1  # Number of blocks in the ResNet
+        self.blocks = 2  # Number of blocks in the ResNet
         self.channels = 128  # Number of channels in the ResNet
         self.reduced_channels_reward = 2  # Number of channels in reward head
         self.reduced_channels_value = 2  # Number of channels in value head
@@ -75,7 +75,7 @@ class MuZeroConfig:
 
         ### Training
         self.results_path = os.path.join(os.path.dirname(__file__), "../results", os.path.basename(__file__)[:-3], datetime.datetime.now().strftime("%Y-%m-%d--%H-%M-%S"))  # Path to store the model weights and TensorBoard logs
-        self.save_weights = False  # Save the weights in results_path as model.weights
+        self.save_weights = True  # Save the weights in results_path as model.weights
         self.training_steps = 10000  # Total number of training steps (ie weights update according to a batch)
         self.batch_size = 512  # Number of parts of games to train on at each training step
         self.checkpoint_interval = 50  # Number of training steps before using the model for self-playing
